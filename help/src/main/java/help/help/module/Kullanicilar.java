@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Kullanicilar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column()
     private String kullaniciAdi;
@@ -14,10 +14,42 @@ public class Kullanicilar {
     @Column()
     private String kullaniciSifre;
 
-    @Column
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getKullaniciSifre() {
+        return kullaniciSifre;
+    }
+
+    public void setKullaniciSifre(String kullaniciSifre) {
+        this.kullaniciSifre = kullaniciSifre;
+    }
+
+    public String getKullaniciAdi() {
+        return kullaniciAdi;
+    }
+
+    public void setKullaniciAdi(String kullaniciAdi) {
+        this.kullaniciAdi = kullaniciAdi;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Column(unique=true)
     private String email;
 
-    public Kullanicilar(int id, String kullaniciAdi, String kullaniciSifre, String email) {
+    public Kullanicilar(Long id, String kullaniciAdi, String kullaniciSifre, String email) {
         this.id = id;
         this.kullaniciAdi = kullaniciAdi;
         this.kullaniciSifre = kullaniciSifre;
