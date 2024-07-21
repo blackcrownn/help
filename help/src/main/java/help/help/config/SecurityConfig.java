@@ -29,6 +29,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/api/kullanici/**").hasRole("ADMIN")
+                        .requestMatchers("/api/yazi/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
@@ -37,7 +38,7 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .permitAll()
                 )
-                .httpBasic(withDefaults()); // using Customizer.withDefaults() as replacement for deprecated method
+                .httpBasic(withDefaults());
 
         return http.build();
     }

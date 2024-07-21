@@ -30,13 +30,16 @@ public class YaziService {
 //            return yazi.get();
 //        }
 //        throw new RuntimeException("Bu id ile bir yazı mevcut değil");
-            return yaziRepository.findById(id).orElseThrow(()->new YaziNotFoundException("bu id ile yazı mevcut değil " + id));
+            return yaziRepository.findById(id)
+                    .orElseThrow(()->new YaziNotFoundException("bu id ile yazı mevcut değil " + id));
     }
 
     public Yazi updateYazi(Long id, UpdateYaziRequest updateYaziRequest) {
         Yazi yazi = getYaziById(id);
         yazi.setIcerik(updateYaziRequest.getIcerik());
         yazi.setBaslik(updateYaziRequest.getBaslik());
+        yazi.setResimUrl(updateYaziRequest.getResimUrl());
+        yazi.setVideoUrl(updateYaziRequest.getVideoUrl());
         return yaziRepository.save(yazi);
     }
 
