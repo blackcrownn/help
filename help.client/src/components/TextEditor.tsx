@@ -22,22 +22,33 @@ export default function TextEditor() {
 
     //const html = quill.root.innerHTML;
 
-    const send = async () => {
-        await axios.post('http://localhost:8080/api/yazi/save', {
-            editorHtml,
-        });
-        console.log(editorHtml);
 
-
-    }  
-
+    // editorHtml assignment:
 
     const [editorHtml, setEditorHtml] = useState('');
 
+    // Changes the content when typed.
     const handleChange = (content, delta, source, editor) => {
-        setEditorHtml(editor.getHTML()); // HTML formatında içeriği günceller
+        setEditorHtml(editor.getHTML()); // 
     };
-         
+
+
+    // send the text to the server
+    const send = async () => {
+        console.log("sunucuya gonderilecek", editorHtml);
+        try { 
+            const response = await axios.post('http://localhost:8080/api/yazi/save', {
+            content: editorHtml,
+        });
+        console.log("sunucuya gonderilecek", editorHtml);
+        console.log('Sunucu yanıtı:', response.data);
+
+        }catch (error) {
+            console.error('Sunucu yaniti :', error);
+        }
+    }  
+
+
     return (
         <div id="editor">
             <ReactQuill theme="snow" onChange={handleChange} />
