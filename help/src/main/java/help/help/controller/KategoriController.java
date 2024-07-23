@@ -27,7 +27,7 @@ public class KategoriController {
         this.kategoriDtoConverter = kategoriDtoConverter;
     }
 
-    @PostMapping("/save")
+    @PostMapping("/savekategori")
     public ResponseEntity<KategoriDto> save(@RequestBody KategoriDto kategoriDto) {
         Kategori kategori = new Kategori(kategoriDto.getKategoriAdi());
         KategoriDto savedKategori = kategoriService.save(kategori);

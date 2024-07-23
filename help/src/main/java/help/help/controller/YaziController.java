@@ -20,7 +20,7 @@ public class YaziController {
         this.yaziService = yaziService;
     }
 
-    @PostMapping("/save")
+    @PostMapping("/saveyazi")
     public ResponseEntity<YaziDto> save(@RequestBody Yazi yazi){
         Yazi yazilar=yaziService.save(yazi);
         YaziDto yaziDto= YaziDtoConverter.convert(yazilar);
