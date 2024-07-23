@@ -37,3 +37,25 @@
     color: #000;
     font-weight: bold;
 }
+
+
+@media print{
+
+    .navbar {
+        display: none;
+    }
+
+    .content{
+        display: none;
+    }
+
+    .logo {
+        margin-left: 0;
+    }
+
+    .container {
+        width: 100%;
+        text-align: center;
+    }
+
+}
