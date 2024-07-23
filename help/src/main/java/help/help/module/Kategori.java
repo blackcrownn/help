@@ -6,7 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.List;
 
 @Entity
-@Table(name = "yazilar")
+@Table(name = "kategoriler")
 public class Kategori {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +16,13 @@ public class Kategori {
 
     @OneToMany(mappedBy = "kategori", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Yazi> yazilar;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    private Kategori parent;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Kategori> altKategoriler;
 
     public Kategori() {
     }
@@ -42,6 +49,22 @@ public class Kategori {
 
     public void setYazilar(List<Yazi> yazilar) {
         this.yazilar = yazilar;
+    }
+
+    public Kategori getParent() {
+        return parent;
+    }
+
+    public void setParent(Kategori parent) {
+        this.parent = parent;
+    }
+
+    public List<Kategori> getAltKategoriler() {
+        return altKategoriler;
+    }
+
+    public void setAltKategoriler(List<Kategori> altKategoriler) {
+        this.altKategoriler = altKategoriler;
     }
 
     public Kategori(String kategoriAdi) {

@@ -7,7 +7,7 @@ import axios from 'axios';
 
 //Rich Text Editor 
 export default function TextEditor() {
-    
+
     /*const wrapperRef = useCallback(wrapper => { 
     if (wrapper == null) return
 
@@ -24,12 +24,12 @@ export default function TextEditor() {
 
     const send = async () => {
         await axios.post('http://localhost:8080/api/yazi/save', {
-            editorHtml,
+            baslik: 'Test Basşiik',
+            icerik: editorHtml,
         });
         console.log(editorHtml);
 
-
-    }  
+    }
 
 
     const [editorHtml, setEditorHtml] = useState('');
@@ -37,18 +37,18 @@ export default function TextEditor() {
     const handleChange = (content, delta, source, editor) => {
         setEditorHtml(editor.getHTML()); // HTML formatında içeriği günceller
     };
-         
+
     return (
         <div id="editor">
             <ReactQuill theme="snow" onChange={handleChange} />
             <div>{`HTML code is ${editorHtml}`}</div>
             <button onClick={send}>gönder</button>
-        
-        
+
+
         </div>
     );
 };
-         
 
 
-  
+
+

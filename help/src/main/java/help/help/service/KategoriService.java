@@ -2,6 +2,8 @@ package help.help.service;
 
 import help.help.dto.KategoriDto;
 import help.help.dto.KategoriDtoConverter;
+import help.help.exception.KategoriNotFoundException;
+import help.help.exception.YaziNotFoundException;
 import help.help.module.Kategori;
 import help.help.repository.KategoriRepository;
 import org.springframework.stereotype.Service;
@@ -43,4 +45,11 @@ public class KategoriService {
     public void deleteKategori(Long id) {
         kategoriRepository.deleteById(id);
     }
+
+    public Kategori getKategoriById(Long id) {
+        return kategoriRepository.findById(id)
+                .orElseThrow(()->new KategoriNotFoundException("BOYLE BİR KATEGORİ MEVCUT DEGİL " + id));
+    }
+
+
 }

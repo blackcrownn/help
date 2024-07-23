@@ -3,8 +3,9 @@ package help.help.service;
 import help.help.dto.UpdateYaziRequest;
 import help.help.dto.YaziDtoConverter;
 import help.help.exception.YaziNotFoundException;
-import help.help.module.Kullanicilar;
+import help.help.module.Kategori;
 import help.help.module.Yazi;
+import help.help.repository.KategoriRepository;
 import help.help.repository.YaziRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +14,20 @@ public class YaziService {
 
     private final YaziRepository yaziRepository;
     private final YaziDtoConverter yaziDtoConverter;
+    private KategoriRepository kategoriRepository;
 
-
-    public YaziService(YaziRepository yaziRepository, YaziDtoConverter yaziDtoConverter) {
+    public YaziService(YaziRepository yaziRepository, YaziDtoConverter yaziDtoConverter, KategoriRepository kategoriRepository) {
         this.yaziRepository = yaziRepository;
         this.yaziDtoConverter = yaziDtoConverter;
+        this.kategoriRepository = kategoriRepository;
     }
 
     public Yazi save(Yazi yazi) {
+        //return yaziRepository.save(yazi);
+        Kategori kategori = kategoriRepository.findByKategoriAdi(yazi.getKategori().getKategoriAdi())
+                .orElse(yazi.getKategori());
+        kategoriRepository.save(kategori);
+        yazi.setKategori(kategori);
         return yaziRepository.save(yazi);
     }
 
@@ -38,20 +45,18 @@ public class YaziService {
         Yazi yazi = getYaziById(id);
         yazi.setIcerik(updateYaziRequest.getIcerik());
         yazi.setBaslik(updateYaziRequest.getBaslik());
-        yazi.setResimUrl(updateYaziRequest.getResimUrl());
-        yazi.setVideoUrl(updateYaziRequest.getVideoUrl());
         return yaziRepository.save(yazi);
     }
 
     public void deleteYaziById(Long id) {
-        findUserById(id);
+        getYaziById(id);
         yaziRepository.deleteById(id);
     }
 
-    private Yazi findUserById(Long id) {
-        return yaziRepository.findById(id)
-                .orElseThrow(() -> new YaziNotFoundException("yazi bulunamadi" + id));
-    }
+//    private Yazi findUserById(Long id) {
+//        return yaziRepository.findById(id)
+//                .orElseThrow(() -> new YaziNotFoundException("yazi bulunamadi" + id));
+//    }
 
 
 

@@ -3,6 +3,7 @@ package help.help.module;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,66 +15,28 @@ public class Yazi {
     private Long id;
     private String baslik;
     private String icerik;
-    private String resimUrl;
-    private String videoUrl;
 
-    @Override
-    public String toString() {
-        return "Yazi{" +
-                "id=" + id +
-                ", baslik='" + baslik + '\'' +
-                ", icerik='" + icerik + '\'' +
-                ", resimUrl='" + resimUrl + '\'' +
-                ", videoUrl='" + videoUrl + '\'' +
-                ", kategori=" + kategori +
-                '}';
-    }
+    @OneToMany(mappedBy = "yazi", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Media> mediaList;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Yazi yazi = (Yazi) o;
-        return Objects.equals(id, yazi.id) && Objects.equals(baslik, yazi.baslik) && Objects.equals(icerik, yazi.icerik) && Objects.equals(resimUrl, yazi.resimUrl) && Objects.equals(videoUrl, yazi.videoUrl) && Objects.equals(kategori, yazi.kategori);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, baslik, icerik, resimUrl, videoUrl, kategori);
-    }
-
-    public String getResimUrl() {
-        return resimUrl;
-    }
-
-    public void setResimUrl(String resimUrl) {
-        this.resimUrl = resimUrl;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
-
-    public Yazi(Long id, String baslik, String icerik, String resimUrl, String videoUrl, Kategori kategori) {
-        this.id = id;
-        this.baslik = baslik;
-        this.icerik = icerik;
-        this.resimUrl = resimUrl;
-        this.videoUrl = videoUrl;
-        this.kategori = kategori;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     @JoinColumn(name = "kategori_id")
     private Kategori kategori;
 
-
-
     public Yazi() {
+    }
+    public Yazi(String baslik, String icerik, Kategori kategori) {
+        this.baslik = baslik;
+        this.icerik = icerik;
+        this.kategori = kategori;
+    }
+
+    public List<Media> getMediaList() {
+        return mediaList;
+    }
+
+    public void setMediaList(List<Media> mediaList) {
+        this.mediaList = mediaList;
     }
 
     public Long getId() {
@@ -106,6 +69,30 @@ public class Yazi {
 
     public void setKategori(Kategori kategori) {
         this.kategori = kategori;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Yazi yazi = (Yazi) o;
+        return Objects.equals(id, yazi.id) && Objects.equals(baslik, yazi.baslik) && Objects.equals(icerik, yazi.icerik) && Objects.equals(mediaList, yazi.mediaList) && Objects.equals(kategori, yazi.kategori);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, baslik, icerik, mediaList, kategori);
+    }
+
+    @Override
+    public String toString() {
+        return "Yazi{" +
+                "id=" + id +
+                ", baslik='" + baslik + '\'' +
+                ", icerik='" + icerik + '\'' +
+                ", mediaList=" + mediaList +
+                ", kategori=" + kategori +
+                '}';
     }
 
 

@@ -46,6 +46,10 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> customerNotFoundExceptionHandler(YaziNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(KategoriNotFoundException.class)
+    public ResponseEntity<?> customerNotFoundExceptionHandler(KategoriNotFoundException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
 
 //    @ExceptionHandler(YaziNotFoundException.class)
 //    public ResponseEntity<?> customerNotFoundExceptionHandler(YaziNotFoundException exception)  {

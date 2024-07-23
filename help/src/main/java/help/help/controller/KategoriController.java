@@ -1,8 +1,13 @@
 package help.help.controller;
 
 import help.help.dto.KategoriDto;
+import help.help.dto.KategoriDtoConverter;
+import help.help.dto.YaziDto;
+import help.help.dto.YaziDtoConverter;
 import help.help.module.Kategori;
+import help.help.module.Yazi;
 import help.help.service.KategoriService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +20,11 @@ public class KategoriController {
 
     private final KategoriService kategoriService;
 
-    public KategoriController(KategoriService kategoriService) {
+    private KategoriDtoConverter kategoriDtoConverter;
+
+    public KategoriController(KategoriService kategoriService, KategoriDtoConverter kategoriDtoConverter) {
         this.kategoriService = kategoriService;
+        this.kategoriDtoConverter = kategoriDtoConverter;
     }
 
     @PostMapping("/save")
@@ -42,5 +50,11 @@ public class KategoriController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         kategoriService.deleteKategori(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<KategoriDto> getKategoriById(@PathVariable Long id) {
+        Kategori kategori = kategoriService.getKategoriById(id);
+        KategoriDto kategoriDto = kategoriDtoConverter.convert(kategori);
+        return ResponseEntity.ok(kategoriDto);
     }
 }

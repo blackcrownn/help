@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/yazi")
+@CrossOrigin
 public class YaziController {
 
     private final YaziService yaziService;
