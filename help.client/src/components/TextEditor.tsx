@@ -24,14 +24,14 @@ export default function TextEditor() {
     //const html = quill.root.innerHTML;
 
 
-    // textHTML assignment:
+    // editorHtml assignment:
 
     
-    const [textHTML, settextHTML] = useState('');
+    const [editorHtml, setEditorHtml] = useState('');
 
     // Changes the content when typed.
-    const handleChange = (editor) => {
-        settextHTML(editor.getHTML()); // 
+    const handleChange = (content, delta, source, editor) => {
+        setEditorHtml(editor.getHTML()); // 
     };
 
     
@@ -40,21 +40,21 @@ export default function TextEditor() {
 
     const handleTitle = (input) => {
         setTitle(input.target.value);
-        console.log("title", input.target.value);
     }
 
 
     // send the text to the server
     const send = async () => {
-        console.log("sunucuya gonderilecek", textHTML);
+        console.log("sunucuya gonderilecek", editorHtml);
+        console.log("sunucuya gonderilecek", title);
         try { 
             const response = await axios.post('http://localhost:8080/api/yazi/save', {
                 baslik: title,
-                icerik: textHTML,
+                icerik: editorHtml,
         });
         console.log("********************");
         
-        console.log("sunucuya gonderilecek", textHTML);
+        console.log("sunucuya gonderilecek", editorHtml);
         console.log('Sunucu yanıtı:', response.data);
 
         }catch (error) {
@@ -82,6 +82,7 @@ export default function TextEditor() {
         <div id="editor">
             {/* Quill */}
             <input type="text" className='title-of-text'placeholder="Yazının başlığı" onChange={handleTitle} />
+            <button onClick={send}>Send</button>
             <ReactQuill className="container" theme="snow" modules={{toolbar: Toolbar_Options}} onChange={handleChange} />
             
             
