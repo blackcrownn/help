@@ -20,6 +20,7 @@ public class YaziController {
         this.yaziService = yaziService;
     }
 
+    @CrossOrigin
     @PostMapping("/saveyazi")
     public ResponseEntity<YaziDto> save(@RequestBody Yazi yazi){
         Yazi yazilar=yaziService.save(yazi);

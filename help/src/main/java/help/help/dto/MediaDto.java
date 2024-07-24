@@ -6,13 +6,13 @@ public class MediaDto {
     private String fileName;
     private String filePath;
     private String fileType;
-    private Yazi yazi;
 
-    public MediaDto(String fileName, String filePath, String fileType, Yazi yazi) {
+
+    public MediaDto(String fileName, String filePath, String fileType) {
         this.fileName = fileName;
         this.filePath = filePath;
         this.fileType = fileType;
-        this.yazi = yazi;
+
     }
 
     public String getFileName() {
@@ -39,11 +39,5 @@ public class MediaDto {
         this.fileType = fileType;
     }
 
-    public Yazi getYazi() {
-        return yazi;
-    }
 
-    public void setYazi(Yazi yazi) {
-        this.yazi = yazi;
-    }
 }

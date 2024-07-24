@@ -8,7 +8,7 @@ import '../css/texteditor.css';
 
 //Rich Text Editor 
 export default function TextEditor() {
-    
+
     /*const wrapperRef = useCallback(wrapper => { 
     if (wrapper == null) return
 
@@ -26,7 +26,7 @@ export default function TextEditor() {
 
     // editorHtml assignment:
 
-    
+
     const [editorHtml, setEditorHtml] = useState('');
 
     // Changes the content when typed.
@@ -34,7 +34,7 @@ export default function TextEditor() {
         setEditorHtml(editor.getHTML()); // 
     };
 
-    
+
 
     const [title, setTitle] = useState('');
 
@@ -47,30 +47,30 @@ export default function TextEditor() {
     const send = async () => {
         console.log("sunucuya gonderilecek", editorHtml);
         console.log("sunucuya gonderilecek", title);
-        try { 
-            const response = await axios.post('http://localhost:8080/api/yazi/save', {
+        try {
+            const response = await axios.post('http://localhost:8080/api/yazi/saveyazi', {
                 baslik: title,
                 icerik: editorHtml,
-        });
-        console.log("********************");
-        
-        console.log("sunucuya gonderilecek", editorHtml);
-        console.log('Sunucu yanıtı:', response.data);
+            });
+            console.log("********************");
 
-        }catch (error) {
+            console.log("sunucuya gonderilecek", editorHtml);
+            console.log('Sunucu yanıtı:', response.data);
+
+        } catch (error) {
             console.error('Sunucu yaniti :', error);
         }
-    }  
+    }
 
 
     const Toolbar_Options = [
-        [{header: [1, 2, 3, 4, 5, 6, false]}],
-        [{font: []}],
-        [{list: 'ordered'}, {list: 'bullet'}],
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ font: [] }],
+        [{ list: 'ordered' }, { list: 'bullet' }],
         ['bold', 'italic', 'underline'],
-        [{color: []}, {background: []}],
-        [{script: 'sub'}, {script: 'super'}],
-        [{align: []}],
+        [{ color: [] }, { background: [] }],
+        [{ script: 'sub' }, { script: 'super' }],
+        [{ align: [] }],
         ['image', 'blockquote', 'code-block'],
         ['clean'],
         ['link']
@@ -81,17 +81,17 @@ export default function TextEditor() {
     return (
         <div id="editor">
             {/* Quill */}
-            <input type="text" className='title-of-text'placeholder="Yazının başlığı" onChange={handleTitle} />
+            <input type="text" className='title-of-text' placeholder="Yazının başlığı" onChange={handleTitle} />
             <button onClick={send}>Send</button>
-            <ReactQuill className="container" theme="snow" modules={{toolbar: Toolbar_Options}} onChange={handleChange} />
-            
-            
-        
-        
+            <ReactQuill className="container" theme="snow" modules={{ toolbar: Toolbar_Options }} onChange={handleChange} />
+
+
+
+
         </div>
     );
 };
-         
 
 
-  
+
+

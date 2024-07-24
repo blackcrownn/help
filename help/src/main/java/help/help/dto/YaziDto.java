@@ -9,23 +9,19 @@ public class YaziDto {
     long id;
     String baslik;
     String icerik;
-    private List<Media> mediaList;
-    private Kategori kategori;
+    private KategoriDto kategori;
 
-    public YaziDto(long id, String baslik, String icerik, List<Media> mediaList, Kategori kategori) {
-        this.id = id;
-        this.baslik = baslik;
-        this.icerik = icerik;
-        this.mediaList = mediaList;
-        this.kategori = kategori;
-    }
+
 
     public YaziDto() {
     }
 
-
-
-
+    public YaziDto(Long id, String baslik, String icerik, KategoriDto kategoriDto) {
+        this.id = id;
+        this.baslik = baslik;
+        this.icerik = icerik;
+        this.kategori = kategoriDto;
+    }
 
     public long getId() {
         return id;
@@ -51,19 +47,11 @@ public class YaziDto {
         this.icerik = icerik;
     }
 
-    public List<Media> getMediaList() {
-        return mediaList;
-    }
-
-    public void setMediaList(List<Media> mediaList) {
-        this.mediaList = mediaList;
-    }
-
-    public Kategori getKategori() {
+    public KategoriDto getKategori() {
         return kategori;
     }
 
-    public void setKategori(Kategori kategori) {
+    public void setKategori(KategoriDto kategori) {
         this.kategori = kategori;
     }
 }

@@ -1,5 +1,6 @@
 package help.help.service;
 
+
 import help.help.dto.UpdateYaziRequest;
 import help.help.dto.YaziDtoConverter;
 import help.help.exception.YaziNotFoundException;
@@ -20,14 +21,10 @@ public class YaziService {
         this.yaziRepository = yaziRepository;
         this.yaziDtoConverter = yaziDtoConverter;
         this.kategoriRepository = kategoriRepository;
-    }
 
+    }
     public Yazi save(Yazi yazi) {
         //return yaziRepository.save(yazi);
-        Kategori kategori = kategoriRepository.findByKategoriAdi(yazi.getKategori().getKategoriAdi())
-                .orElse(yazi.getKategori());
-        kategoriRepository.save(kategori);
-        yazi.setKategori(kategori);
         return yaziRepository.save(yazi);
     }
 
@@ -40,7 +37,6 @@ public class YaziService {
             return yaziRepository.findById(id)
                     .orElseThrow(()->new YaziNotFoundException("bu id ile yazı mevcut değil " + id));
     }
-
     public Yazi updateYazi(Long id, UpdateYaziRequest updateYaziRequest) {
         Yazi yazi = getYaziById(id);
         yazi.setIcerik(updateYaziRequest.getIcerik());

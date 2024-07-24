@@ -1,13 +1,8 @@
 package help.help.controller;
-
 import help.help.dto.KategoriDto;
 import help.help.dto.KategoriDtoConverter;
-import help.help.dto.YaziDto;
-import help.help.dto.YaziDtoConverter;
 import help.help.module.Kategori;
-import help.help.module.Yazi;
 import help.help.service.KategoriService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

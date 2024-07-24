@@ -38,7 +38,7 @@ public class MediaUploadService {
         media.setFileName(fileName);
         media.setFilePath(path.toString());
         media.setFileType(file.getContentType());
-        media.setYazi(yazi);
+
 
         return mediaRepository.save(media);
     }

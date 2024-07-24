@@ -15,17 +15,14 @@ public class Media {
     private String filePath;
     private String fileType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "yazi_id")
-    private Yazi yazi;
 
     public Media() {}
 
-    public Media(String fileName, String filePath, String fileType, Yazi yazi) {
+    public Media(String fileName, String filePath, String fileType) {
         this.fileName = fileName;
         this.filePath = filePath;
         this.fileType = fileType;
-        this.yazi = yazi;
+
     }
 
     public Long getId() {
@@ -60,11 +57,4 @@ public class Media {
         this.fileType = fileType;
     }
 
-    public Yazi getYazi() {
-        return yazi;
-    }
-
-    public void setYazi(Yazi yazi) {
-        this.yazi = yazi;
-    }
 }

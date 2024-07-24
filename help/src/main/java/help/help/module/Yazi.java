@@ -1,9 +1,9 @@
 package help.help.module;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,13 +14,14 @@ public class Yazi {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private Long id;
     private String baslik;
-    private String icerik;
 
-    @OneToMany(mappedBy = "yazi", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Media> mediaList;
+    @Lob
+    @Column(columnDefinition = "text")
+    private String icerik;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     @JoinColumn(name = "kategori_id")
+    @JsonBackReference
     private Kategori kategori;
 
     public Yazi() {
@@ -31,13 +32,7 @@ public class Yazi {
         this.kategori = kategori;
     }
 
-    public List<Media> getMediaList() {
-        return mediaList;
-    }
 
-    public void setMediaList(List<Media> mediaList) {
-        this.mediaList = mediaList;
-    }
 
     public Long getId() {
         return id;
@@ -76,12 +71,12 @@ public class Yazi {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Yazi yazi = (Yazi) o;
-        return Objects.equals(id, yazi.id) && Objects.equals(baslik, yazi.baslik) && Objects.equals(icerik, yazi.icerik) && Objects.equals(mediaList, yazi.mediaList) && Objects.equals(kategori, yazi.kategori);
+        return Objects.equals(id, yazi.id) && Objects.equals(baslik, yazi.baslik) && Objects.equals(icerik, yazi.icerik) &&  Objects.equals(kategori, yazi.kategori);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, baslik, icerik, mediaList, kategori);
+        return Objects.hash(id, baslik, icerik, kategori);
     }
 
     @Override
@@ -90,8 +85,7 @@ public class Yazi {
                 "id=" + id +
                 ", baslik='" + baslik + '\'' +
                 ", icerik='" + icerik + '\'' +
-                ", mediaList=" + mediaList +
-                ", kategori=" + kategori +
+                ", kategori=" + (kategori != null ? kategori.getId() : null) +
                 '}';
     }
 

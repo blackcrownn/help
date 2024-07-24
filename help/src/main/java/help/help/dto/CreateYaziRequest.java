@@ -1,16 +1,17 @@
 package help.help.dto;
 
+import help.help.module.Kategori;
+
 public class CreateYaziRequest {
     String baslik;
     String icerik;
-    private String resimUrl;
-    private String videoUrl;
+    private Kategori kategori;
 
-    public CreateYaziRequest(String baslik, String icerik, String resimUrl, String videoUrl) {
+
+    public CreateYaziRequest(String baslik, String icerik) {
         this.baslik = baslik;
         this.icerik = icerik;
-        this.resimUrl = resimUrl;
-        this.videoUrl = videoUrl;
+
     }
 // private Long kategoriId;
 
@@ -35,19 +36,4 @@ public class CreateYaziRequest {
         this.icerik = icerik;
     }
 
-    public String getResimUrl() {
-        return resimUrl;
-    }
-
-    public void setResimUrl(String resimUrl) {
-        this.resimUrl = resimUrl;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
 }

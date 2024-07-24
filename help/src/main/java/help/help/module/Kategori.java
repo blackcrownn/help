@@ -1,9 +1,9 @@
 package help.help.module;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.List;
 
 @Entity
 @Table(name = "kategoriler")
@@ -12,19 +12,19 @@ public class Kategori {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private Long id;
-    private String kategoriAdi;
 
-    @OneToMany(mappedBy = "kategori", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Yazi> yazilar;
+    @Column(unique = true)
+    private String kategoriAdi;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
+    @JsonBackReference
     private Kategori parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Kategori> altKategoriler;
-
     public Kategori() {
+    }
+
+    public Kategori(String kategoriAdi) {
     }
 
     public Long getId() {
@@ -42,14 +42,7 @@ public class Kategori {
     public void setKategoriAdi(String kategoriAdi) {
         this.kategoriAdi = kategoriAdi;
     }
-
-    public List<Yazi> getYazilar() {
-        return yazilar;
-    }
-
-    public void setYazilar(List<Yazi> yazilar) {
-        this.yazilar = yazilar;
-    }
+    
 
     public Kategori getParent() {
         return parent;
@@ -59,16 +52,9 @@ public class Kategori {
         this.parent = parent;
     }
 
-    public List<Kategori> getAltKategoriler() {
-        return altKategoriler;
-    }
-
-    public void setAltKategoriler(List<Kategori> altKategoriler) {
-        this.altKategoriler = altKategoriler;
-    }
-
-    public Kategori(String kategoriAdi) {
+    public Kategori(String kategoriAdi, Kategori parent) {
         this.kategoriAdi = kategoriAdi;
+        this.parent = parent;
     }
 
     @Override
@@ -76,6 +62,7 @@ public class Kategori {
         return "Kategori{" +
                 "id=" + id +
                 ", kategoriAdi='" + kategoriAdi + '\'' +
+                ", parent=" + (parent != null ? parent.getId() : null) +
                 '}';
     }
 }
