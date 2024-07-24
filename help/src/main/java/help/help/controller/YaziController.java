@@ -9,6 +9,8 @@ import help.help.service.YaziService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/yazi")
 @CrossOrigin
@@ -47,5 +49,9 @@ public class YaziController {
         yaziService.deleteYaziById(id);
         return ResponseEntity.ok().build();
     }
+//    @GetMapping("/allyazi")
+//    public List<YaziDto> getAllYazilar() {
+//        return yaziService.getAllYazilar();
+//    }
 
 }

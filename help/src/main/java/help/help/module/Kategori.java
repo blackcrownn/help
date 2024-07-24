@@ -13,7 +13,7 @@ public class Kategori {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private String kategoriAdi;
 
     @ManyToOne(fetch = FetchType.LAZY)

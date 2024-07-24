@@ -4,13 +4,13 @@ import Content from "../components/Content.tsx";
 
 
 export default function ContentPage() {
-    
-    var id = 36 ;
-    
+
+    var id = 49;
+
     const get = () => {
-        return  Content(id);
+        return Content(id);
     };
-    
+
     return (
         <div>
             {get()}

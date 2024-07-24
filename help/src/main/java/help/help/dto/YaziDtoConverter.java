@@ -17,7 +17,7 @@ public class YaziDtoConverter {
     }
 
 
-    public static List<YaziDto> convert(List<Yazi> fromList) {
+        public static List<YaziDto> convert(List<Yazi> fromList) {
         return fromList.stream()
                 .map(YaziDtoConverter::convert)
                 .collect(Collectors.toList());

@@ -1,26 +1,30 @@
 package help.help.service;
 
 
+import help.help.dto.KategoriDto;
 import help.help.dto.UpdateYaziRequest;
+import help.help.dto.YaziDto;
 import help.help.dto.YaziDtoConverter;
 import help.help.exception.YaziNotFoundException;
-import help.help.module.Kategori;
 import help.help.module.Yazi;
-import help.help.repository.KategoriRepository;
 import help.help.repository.YaziRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class YaziService {
 
     private final YaziRepository yaziRepository;
     private final YaziDtoConverter yaziDtoConverter;
-    private KategoriRepository kategoriRepository;
 
-    public YaziService(YaziRepository yaziRepository, YaziDtoConverter yaziDtoConverter, KategoriRepository kategoriRepository) {
+
+
+    public YaziService(YaziRepository yaziRepository, YaziDtoConverter yaziDtoConverter) {
         this.yaziRepository = yaziRepository;
         this.yaziDtoConverter = yaziDtoConverter;
-        this.kategoriRepository = kategoriRepository;
+
 
     }
     public Yazi save(Yazi yazi) {
@@ -54,7 +58,12 @@ public class YaziService {
 //                .orElseThrow(() -> new YaziNotFoundException("yazi bulunamadi" + id));
 //    }
 
-
+//    public List<YaziDto> getAllYazilar() {
+//        return yaziRepository.findAll()
+//                .stream()
+//                .map(yaziDtoConverter::convert)
+//                .collect(Collectors.toList());
+//    }
 
 
 }
