@@ -27,9 +27,9 @@ export default function Contents(id: number) {
 
     const content = text ===undefined ? <p>Yükleniyor...</p> : 
         <div> 
-            {text.baslik}
+            <div> {text.baslik}</div>
             <br />
-            {text.icerik}
+            <div dangerouslySetInnerHTML={{ __html: text.icerik }} />
         </div>
    
     
