@@ -10,7 +10,7 @@ interface Text{
 
 
 
-export default function Contents(id: number) {
+export default function Contents(id: string) {
     const [text, setText] = useState<Text>();
     useEffect(() =>{
 
