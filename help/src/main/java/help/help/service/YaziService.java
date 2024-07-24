@@ -58,12 +58,13 @@ public class YaziService {
 //                .orElseThrow(() -> new YaziNotFoundException("yazi bulunamadi" + id));
 //    }
 
-//    public List<YaziDto> getAllYazilar() {
-//        return yaziRepository.findAll()
-//                .stream()
-//                .map(yaziDtoConverter::convert)
-//                .collect(Collectors.toList());
-//    }
 
 
+
+    public  List<YaziDto> findAll() {
+        return yaziRepository.findAll()
+                .stream()
+                .map(y -> YaziDtoConverter.convert(y))
+                .collect(Collectors.toList());
+    }
 }

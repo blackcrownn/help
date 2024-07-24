@@ -17,15 +17,24 @@ public class YaziDtoConverter {
     }
 
 
-        public static List<YaziDto> convert(List<Yazi> fromList) {
-        return fromList.stream()
-                .map(YaziDtoConverter::convert)
-                .collect(Collectors.toList());
-    }
-        //Akış Başlatma: fromList.stream() - fromList listesindeki elemanları işlemek için bir akış başlatılır.
-        //Dönüştürme İşlemi: .map(from -> new UserDto(...)) - Akıştaki her Users nesnesi, UserDto nesnesine dönüştürülür.
-        //Toplama İşlemi: .collect(Collectors.toList()) - Dönüştürülen UserDto nesneleri bir liste olarak toplanır ve döndürülür.
-    }
+//        public static List<YaziDto> convert(List<Yazi> fromList) {
+//        return fromList.stream()
+//                .map(YaziDtoConverter::convert)
+//                .collect(Collectors.toList());
+//    }
+public static List<YaziDto> convert(List<Yazi> fromList) {
+    return fromList.stream().map(from -> new YaziDto(
+            from.getId(),
+            from.getBaslik(),
+            from.getIcerik(),
+            KategoriDtoConverter.convert(from.getKategori())
+    )).collect(Collectors.toList());
+    //Akış Başlatma: fromList.stream() - fromList listesindeki elemanları işlemek için bir akış başlatılır.
+    //Dönüştürme İşlemi: .map(from -> new UserDto(...)) - Akıştaki her Users nesnesi, UserDto nesnesine dönüştürülür.
+    //Toplama İşlemi: .collect(Collectors.toList()) - Dönüştürülen UserDto nesneleri bir liste olarak toplanır ve döndürülür.
+}
 
 
+
+}
 

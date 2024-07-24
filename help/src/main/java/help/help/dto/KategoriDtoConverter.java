@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class KategoriDtoConverter {
-    public KategoriDto convert(Kategori from) {
+    public static KategoriDto convert(Kategori from) {
         return new KategoriDto(from.getId(),from.getKategoriAdi());
     }
 

@@ -15,7 +15,7 @@ public class KategoriController {
 
     private final KategoriService kategoriService;
 
-    private KategoriDtoConverter kategoriDtoConverter;
+    private final KategoriDtoConverter kategoriDtoConverter;
 
     public KategoriController(KategoriService kategoriService, KategoriDtoConverter kategoriDtoConverter) {
         this.kategoriService = kategoriService;

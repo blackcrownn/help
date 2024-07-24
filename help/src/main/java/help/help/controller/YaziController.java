@@ -17,9 +17,12 @@ import java.util.List;
 public class YaziController {
 
     private final YaziService yaziService;
+    private final YaziDtoConverter yaziDtoConverter;
 
-    public YaziController(YaziService yaziService) {
+
+    public YaziController(YaziService yaziService, YaziDtoConverter yaziDtoConverter) {
         this.yaziService = yaziService;
+        this.yaziDtoConverter = yaziDtoConverter;
     }
 
     @CrossOrigin
@@ -49,9 +52,10 @@ public class YaziController {
         yaziService.deleteYaziById(id);
         return ResponseEntity.ok().build();
     }
-//    @GetMapping("/allyazi")
-//    public List<YaziDto> getAllYazilar() {
-//        return yaziService.getAllYazilar();
-//    }
+    @GetMapping("/allyazi")
+    public ResponseEntity<List<YaziDto>> getAll() {
+        List<YaziDto> yazilar = yaziService.findAll();
+        return ResponseEntity.ok(yazilar);
+    }
 
 }

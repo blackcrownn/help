@@ -30,7 +30,7 @@ public class KategoriService {
     public List<KategoriDto> findAll() {
         return kategoriRepository.findAll()
                 .stream()
-                .map(kategoriDtoConverter::convert)
+                .map(y -> KategoriDtoConverter.convert(y))
                 .collect(Collectors.toList());
     }
 
