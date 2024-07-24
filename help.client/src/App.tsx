@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TextEditor from './components/TextEditor.tsx';
 import HomePage from './pages/Homepage.tsx'; 
 import Navbar from './components/Navbar.tsx';
+import ContentPage from './pages/ContentPage.tsx';
 
 
 
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/*" element={<HomePage/>} />
         <Route path="/texteditor" element={<TextEditor/>} />
+        <Route path="/content/*" element={<ContentPage/>}/>
       </Routes>
     </div>
   );

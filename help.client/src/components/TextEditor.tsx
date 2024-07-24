@@ -1,49 +1,36 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import Quill from 'quill';
+//import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
-import ReactQuill, { displayName } from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
 import axios from 'axios';
 import '../css/texteditor.css';
+import ImageResize from "quill-image-resize-module-react";
+
+Quill.register("modules/imageResize", ImageResize);
+
+
 
 
 //Rich Text Editor 
 export default function TextEditor() {
     
-    /*const wrapperRef = useCallback(wrapper => { 
-    if (wrapper == null) return
-
-        wrapper.innerHTML = ""
-        const editor = document.createElement('div');
-        wrapper.append(editor);
-        new Quill(editor, {theme:'snow'});
-    }, []); */
-
-
-    //const quill = new Quill('#editor');
-
-    //const html = quill.root.innerHTML;
-
-
-    // editorHtml assignment:
-
-    
+    // editorHtml assignment:    
     const [editorHtml, setEditorHtml] = useState('');
+    // title of the content
+    const [title, setTitle] = useState('');
 
-    // Changes the content when typed.
+
+    // Changes the values when typed.
     const handleChange = (content, delta, source, editor) => {
         setEditorHtml(editor.getHTML()); // 
     };
-
-    
-
-    const [title, setTitle] = useState('');
-
+   
     const handleTitle = (input) => {
         setTitle(input.target.value);
     }
 
 
-    // send the text to the server
+    // send the values to the server
     const send = async () => {
         console.log("sunucuya gonderilecek", editorHtml);
         console.log("sunucuya gonderilecek", title);
@@ -63,9 +50,10 @@ export default function TextEditor() {
     }  
 
 
-    const Toolbar_Options = [
-        [{header: [1, 2, 3, 4, 5, 6, false]}],
-        [{font: []}],
+    const modules = {
+        toolbar: [  // toolbar options
+            [{header: [1, 2, 3, 4, 5, 6, false]}],
+            [{font: []}],
         [{list: 'ordered'}, {list: 'bullet'}],
         ['bold', 'italic', 'underline'],
         [{color: []}, {background: []}],
@@ -75,15 +63,22 @@ export default function TextEditor() {
         ['clean'],
         ['link']
 
-    ]
+        ],
+        imageResize: {  // image resize options
+            modules: ["Resize", "DisplaySize"]
+          }
+
+
+    }
+
 
 
     return (
         <div id="editor">
             {/* Quill */}
-            <input type="text" className='title-of-text'placeholder="Yazının başlığı" onChange={handleTitle} />
+            <input type="text" className='title-of-text' placeholder="Yazının başlığı" onChange={handleTitle} />
             <button onClick={send}>Send</button>
-            <ReactQuill className="container" theme="snow" modules={{toolbar: Toolbar_Options}} onChange={handleChange} />
+            <ReactQuill className="container" theme="snow" modules={modules} onChange={handleChange} />
             
             
         
