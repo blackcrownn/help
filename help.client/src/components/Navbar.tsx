@@ -10,7 +10,7 @@ function Navbar() {
             {//This links to the contents page
             }
             <div className="content">
-            <Link to='/Contents' className="content">İçerikler</Link>
+            <Link to='/' className="content">İçerikler</Link>
             </div>
         
             <div className="content">

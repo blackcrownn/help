@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
+import {Link} from "react-router-dom";
 
 
 interface Text{
-    title: string,
-    content: string,
+    id: number;
+    baslik: string,
+    icerik: string,
 }
 
 
 
-export default function Contents() {
+export default function Contents(id: number) {
     const [text, setText] = useState<Text>();
     useEffect(() =>{
 
     const getData = async () => {
-        const response = await fetch('http://localhost:8080/api/yazi/id/1');
+        const response = await fetch('http://localhost:8080/api/yazi/id/'+id);
         console.log(response);
         const data = await response.json();
         setText(data);
@@ -25,9 +27,9 @@ export default function Contents() {
 
     const content = text ===undefined ? <p>Yükleniyor...</p> : 
         <div> 
-            {text.title}
+            {text.baslik}
             <br />
-            {text.content}
+            {text.icerik}
         </div>
    
     
