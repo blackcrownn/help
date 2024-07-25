@@ -5,8 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 interface CategoryProps{
     id: number;
-    parentId: number | null;
-    title: string;
+    kategoriAdi: string;
 }
 
 
@@ -37,7 +36,7 @@ export default function Category() {
     <ul>
         {categories.map(category => 
                 <li key={category.id}>
-                    <p>{category.title}</p>
+                    <p>{category.kategoriAdi}</p>
                 </li>
         )}
     </ul>
