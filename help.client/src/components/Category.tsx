@@ -43,6 +43,9 @@ export default function Category() {
         )}
     </ul>
     
+    return <div>
+        {items}
+    </div>;
     
 
 }
