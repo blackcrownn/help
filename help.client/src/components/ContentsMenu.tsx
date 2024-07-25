@@ -21,7 +21,7 @@ const [items, setItems] = useState<MenuItems[]>([]);
 useEffect(() =>{
     const fetchContens = async () => {
         try{
-            const response = await axios.get('http://localhost:8080/api/yazi');
+            const response = await axios.get('http://localhost:8080/api/kategori/all');
             console.log(response);
             const contents = response.data;
             setItems(contents);
@@ -44,7 +44,9 @@ useEffect(() =>{
         )}
     </ul>
 
-
+        return <div>
+            {content}
+        </div>;
   
 };
 
