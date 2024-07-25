@@ -21,8 +21,7 @@ export default function Category() {
             try{
                 const response = await axios.get('http://localhost:8080/api/kategori/findall');
                 console.log(response);
-                const categories = response.data;
-                setCategories(categories);
+                setCategories(response.data);
             }catch(error){  
                 console.error('Sunucu yaniti :', error);
             }
