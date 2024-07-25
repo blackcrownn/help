@@ -25,6 +25,7 @@ public class Kategori {
     }
 
     public Kategori(String kategoriAdi) {
+        this.kategoriAdi = kategoriAdi;
     }
 
     public Long getId() {

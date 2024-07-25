@@ -4,15 +4,6 @@ public class KategoriDto {
     private Long id;
     private String kategoriAdi;
 
-
-    public KategoriDto() {
-    }
-
-    public KategoriDto(String kategoriAdi) {
-        this.kategoriAdi = kategoriAdi;
-
-    }
-
     public KategoriDto(Long id, String kategoriAdi) {
         this.id = id;
         this.kategoriAdi = kategoriAdi;
@@ -32,9 +23,7 @@ public class KategoriDto {
 
     public void setKategoriAdi(String kategoriAdi) {
         this.kategoriAdi = kategoriAdi;
+
     }
-
-
-
-
 }
+

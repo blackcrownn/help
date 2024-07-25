@@ -1,10 +1,5 @@
 package help.help.dto;
 
-import help.help.module.Kategori;
-import help.help.module.Media;
-
-import java.util.List;
-
 public class YaziDto {
     long id;
     String baslik;

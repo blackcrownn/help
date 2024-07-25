@@ -1,6 +1,4 @@
 package help.help.dto;
-
-import help.help.module.Kategori;
 import help.help.module.Yazi;
 import org.springframework.stereotype.Component;
 

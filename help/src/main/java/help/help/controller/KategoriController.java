@@ -27,8 +27,9 @@ public class KategoriController {
         Kategori kategori = new Kategori(kategoriDto.getKategoriAdi());
         KategoriDto savedKategori = kategoriService.save(kategori);
         return new ResponseEntity<>(savedKategori, HttpStatus.CREATED);
-    }
 
+    }
+    @CrossOrigin
     @GetMapping("/all")
     public ResponseEntity<List<KategoriDto>> findAll() {
         List<KategoriDto> kategoriler = kategoriService.findAll();
