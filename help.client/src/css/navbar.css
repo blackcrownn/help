@@ -13,7 +13,7 @@
     height: 3rem;
     font-size: 32px;
     font-weight: bold;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     margin-left: 20px;
     padding-top: 1rem;
     text-align: center;
@@ -34,7 +34,7 @@
     width: 20%;
     margin-left: 5rem;
     text-decoration: none;
-    color: #000;
+    color: #ffffff;
     font-weight: bold;
 }
 

@@ -12,13 +12,13 @@ interface CategoryProps{
 
 export default function Category() {
 
-
+    //
     const [categories, setCategories] = useState<CategoryProps[]>([]);
 
     useEffect(() =>{
         const fetchCategories = async () => {
             try{
-                const response = await axios.get('http://localhost:8080/api/kategori/findall');
+                const response = await axios.get('http://localhost:8080/api/kategori/all');
                 console.log(response);
                 setCategories(response.data);
             }catch(error){  

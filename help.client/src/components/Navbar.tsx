@@ -10,10 +10,6 @@ function Navbar() {
             {//This links to the contents page
             }
             <div className="content">
-            <Link to='/' className="content">İçerikler</Link>
-            </div>
-        
-            <div className="content">
                 <input type="text" placeholder="Ara..." />
                 <button>Ara</button>
             </div>

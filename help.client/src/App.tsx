@@ -13,6 +13,7 @@ function App() {
   return (
     <div>
       <Navbar/>
+      <ContentsMenu/>
       <Routes>
         <Route path="/*" element={<HomePage/>} />
         <Route path="/texteditor" element={<TextEditor/>} />

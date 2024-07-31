@@ -1,57 +1,68 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Treebeard } from "react-treebeard";    // Import the Treebeard component from the react-treebeard library
+import "../css/contentmenu.css";
 
-
-
-interface MenuItems{
-    id: number;
-    title: string,
-    content: string,
-    parentId: number | null,
+interface CategoryProps {
+  id: number;
+  kategoriAdi: string;
+  parentid: number;
 }
 
+interface TitleProps {
+  id: number;
+  baslik: string;
+  parentid: number;
+}
 
+export default function Category() {
+  const [categories, setCategories] = useState<CategoryProps[]>([]);
+  const [titles, setTitles] = useState<TitleProps[]>([]);
 
-export default function ContentsMenu() {
-
-const [items, setItems] = useState<MenuItems[]>([]);
-
-useEffect(() =>{
-    const fetchContens = async () => {
-        try{
-            const response = await axios.get('http://localhost:8080/api/kategori/all');
-            console.log(response);
-            const contents = response.data;
-            setItems(contents);
-        }catch(error){  
-            console.error('Sunucu yaniti :', error);
-        }
-            
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/api/kategori/all"
+        );
+        console.log(response);
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Sunucu yaniti :", error);
+      }
     };
-    fetchContens();
-}, []);
-    
-    const content = items === undefined ?
-     <p>Yükleniyor...</p> 
-    :
-    <ul>
-        {items.map(item => 
-                <li key={item.id}>
-                    <Link to={"/content/"+item.id}>{item.title}</Link>
-                </li>
-        )}
-    </ul>
+    fetchCategories();
+  }, []);
 
-        return <div>
-            {content}
-        </div>;
-  
-};
+  const items =
+    categories === undefined ? (
+      <p>Yükleniyor...</p>
+    ) : (
+      <ul>
+        {categories.map((category) => (
+          <li key={category.id}>
+            <p>{category.kategoriAdi}</p>
+          </li>
+        ))}
+      </ul>
+    );
 
+  const menut = categories === undefined ? <p>Yükleniyor...</p> : <ul></ul>;
 
+  const [isOpen, setIsOpen] = useState(false);
 
+  const toggleOffcanvas = () => {
+    setIsOpen(!isOpen);
+  };
 
-
-
+  return (
+    <div className="menuContainer">
+      <button onClick={toggleOffcanvas} className={"open-btn" + (isOpen ? " open" : "")}>=</button>
+      <div className={"menu" + (isOpen ? " open" : "")}>
+        <div className="menuitems">
+          <h2>İçerikler</h2>
+          <p>{items}</p>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,52 @@
+
+.menuContainer{
+    background-color: transparent;
+    width: 25%;
+    min-height: auto;
+    padding: 0;
+
+}
+
+
+.menu{
+    display: block;
+    position: absolute;
+    align-self: left;
+    background-color: #724458;
+    width: 20%;
+    height: 100%;
+    box-shadow: inset 400px 700px 500px -500px #445872;
+    left: -20%;
+    transition: transform 0.3s ease;
+    z-index: 1000; /* Menüyü diğer içeriklerin üzerine yerleştirir */
+    overflow: hidden;
+}
+
+
+
+.menu.open {
+    transform: translateX(100%); /* Menü ekrandan sağa kayar */
+  }
+  
+
+  .open-btn {
+    position: absolute;
+    background-color: #080707;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 1001; 
+    border-radius:0 0  50% 0 ;
+    transition: transform 0.3s ease;
+    
+  }
+
+
+  
+
+.menuitems{
+    color: #fff;
+    padding-left: 1rem ;
+
+}
