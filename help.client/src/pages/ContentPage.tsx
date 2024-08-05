@@ -10,12 +10,12 @@ export default function ContentPage() {
     const id = splitted[splitted.length-1];
     
     const get = () => {
-        return Content(id);
+        //return Content(id);
     };
 
     return (
         <div>
-            {get()}
+            {}
         </div>
     );
 }

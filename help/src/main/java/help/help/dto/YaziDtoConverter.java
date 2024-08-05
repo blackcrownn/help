@@ -15,6 +15,12 @@ public class YaziDtoConverter {
     }
 
 
+    public static SimpleYaziDto convertSimple(Yazi from) {
+        KategoriDto kategoriDto = from.getKategori() != null ? new KategoriDto(from.getKategori().getId(), from.getKategori().getKategoriAdi()) : null;
+        return new SimpleYaziDto(from.getId(), from.getBaslik(), kategoriDto);
+    }
+
+
 //        public static List<YaziDto> convert(List<Yazi> fromList) {
 //        return fromList.stream()
 //                .map(YaziDtoConverter::convert)

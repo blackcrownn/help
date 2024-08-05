@@ -1,15 +1,21 @@
 package help.help.controller;
 
 import help.help.dto.CreateYaziRequest;
+import help.help.dto.SimpleYaziDto;
 import help.help.dto.UpdateYaziRequest;
 import help.help.dto.YaziDto;
 import help.help.dto.YaziDtoConverter;
 import help.help.module.Yazi;
 import help.help.service.YaziService;
+
+import org.springframework.boot.autoconfigure.task.TaskExecutionProperties.Simple;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/yazi")
@@ -52,10 +58,17 @@ public class YaziController {
         yaziService.deleteYaziById(id);
         return ResponseEntity.ok().build();
     }
-    @GetMapping("/allyazi")
+    @GetMapping("/all")
     public ResponseEntity<List<YaziDto>> getAll() {
         List<YaziDto> yazilar = yaziService.findAll();
         return ResponseEntity.ok(yazilar);
     }
+
+
+    @GetMapping("/simple")
+    public List<SimpleYaziDto> getSimpleYaziDto(){
+        return yaziService.getAllSimpleYaziDtos();
+    }  
+
 
 }

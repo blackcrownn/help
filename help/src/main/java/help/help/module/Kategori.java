@@ -1,8 +1,11 @@
 package help.help.module;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.mapping.List;
 
 
 @Entity
@@ -20,6 +23,7 @@ public class Kategori {
     @JoinColumn(name = "parent_id")
     @JsonBackReference
     private Kategori parent;
+
 
     public Kategori() {
     }

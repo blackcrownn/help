@@ -47,6 +47,7 @@ public class KategoriController {
         kategoriService.deleteKategori(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<KategoriDto> getKategoriById(@PathVariable Long id) {
         Kategori kategori = kategoriService.getKategoriById(id);

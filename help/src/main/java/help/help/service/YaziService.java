@@ -2,12 +2,15 @@ package help.help.service;
 
 
 import help.help.dto.KategoriDto;
+import help.help.dto.SimpleYaziDto;
 import help.help.dto.UpdateYaziRequest;
 import help.help.dto.YaziDto;
 import help.help.dto.YaziDtoConverter;
 import help.help.exception.YaziNotFoundException;
 import help.help.module.Yazi;
 import help.help.repository.YaziRepository;
+
+import org.springframework.boot.autoconfigure.task.TaskExecutionProperties.Simple;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,8 +61,13 @@ public class YaziService {
 //                .orElseThrow(() -> new YaziNotFoundException("yazi bulunamadi" + id));
 //    }
 
-
-
+    
+    public List<SimpleYaziDto> getAllSimpleYaziDtos(){
+        List<Yazi> yazilar = yaziRepository.findAll();
+        return yazilar.stream()
+                .map(y -> YaziDtoConverter.convertSimple(y))
+                .collect(Collectors.toList());
+    }
 
     public  List<YaziDto> findAll() {
         return yaziRepository.findAll()

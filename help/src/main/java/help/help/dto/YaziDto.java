@@ -18,6 +18,7 @@ public class YaziDto {
         this.kategori = kategoriDto;
     }
 
+
     public long getId() {
         return id;
     }
