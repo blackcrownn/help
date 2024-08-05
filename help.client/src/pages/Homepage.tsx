@@ -1,4 +1,5 @@
 import React from "react";
+import ContentsMenu from "../components/ContentsMenu.tsx";
 
 
 
@@ -6,8 +7,7 @@ import React from "react";
 function homepage() {
     return ( 
         <div>
-            
-            <h1>Homepage</h1>
+            <ContentsMenu/>
         </div>
     )
 }
