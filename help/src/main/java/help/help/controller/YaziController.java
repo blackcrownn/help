@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/yazi")
+@CrossOrigin
 public class YaziController {
 
     @Autowired
@@ -37,6 +38,7 @@ public class YaziController {
     }
 
     @DeleteMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<Void> deleteYazi(@PathVariable Long id) {
         yaziService.deleteYazi(id);
         return ResponseEntity.noContent().build();
