@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Objects;
-
 @Entity
 @Table(name = "yazilar")
 public class Yazi {
@@ -19,20 +17,24 @@ public class Yazi {
     @Column(columnDefinition = "text")
     private String icerik;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "kategori_id")
     @JsonBackReference
     private Kategori kategori;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "parent_id")
+//    private Yazi parent;
+
     public Yazi() {
     }
+
     public Yazi(String baslik, String icerik, Kategori kategori) {
         this.baslik = baslik;
         this.icerik = icerik;
         this.kategori = kategori;
+        //this.parent = parent;
     }
-
-
 
     public Long getId() {
         return id;
@@ -58,25 +60,14 @@ public class Yazi {
         this.icerik = icerik;
     }
 
+
+
     public Kategori getKategori() {
         return kategori;
     }
 
     public void setKategori(Kategori kategori) {
         this.kategori = kategori;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Yazi yazi = (Yazi) o;
-        return Objects.equals(id, yazi.id) && Objects.equals(baslik, yazi.baslik) && Objects.equals(icerik, yazi.icerik) &&  Objects.equals(kategori, yazi.kategori);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, baslik, icerik, kategori);
     }
 
     @Override

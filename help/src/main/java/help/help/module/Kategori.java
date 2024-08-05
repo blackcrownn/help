@@ -1,22 +1,18 @@
 package help.help.module;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.mapping.List;
-
+import java.util.List;
 
 @Entity
 @Table(name = "kategoriler")
 public class Kategori {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private Long id;
 
-    @Column(unique = true,nullable = false)
+    @Column(nullable = false, unique = true)
     private String kategoriAdi;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -24,12 +20,17 @@ public class Kategori {
     @JsonBackReference
     private Kategori parent;
 
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Kategori> subCategories;
 
-    public Kategori() {
-    }
+    @OneToMany(mappedBy = "kategori", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Yazi> yazilar;
 
-    public Kategori(String kategoriAdi) {
+    public Kategori() {}
+
+    public Kategori(String kategoriAdi, Kategori parent) {
         this.kategoriAdi = kategoriAdi;
+        this.parent = parent;
     }
 
     public Long getId() {
@@ -47,7 +48,6 @@ public class Kategori {
     public void setKategoriAdi(String kategoriAdi) {
         this.kategoriAdi = kategoriAdi;
     }
-    
 
     public Kategori getParent() {
         return parent;
@@ -57,9 +57,20 @@ public class Kategori {
         this.parent = parent;
     }
 
-    public Kategori(String kategoriAdi, Kategori parent) {
-        this.kategoriAdi = kategoriAdi;
-        this.parent = parent;
+    public List<Kategori> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(List<Kategori> subCategories) {
+        this.subCategories = subCategories;
+    }
+
+    public List<Yazi> getYazilar() {
+        return yazilar;
+    }
+
+    public void setYazilar(List<Yazi> yazilar) {
+        this.yazilar = yazilar;
     }
 
     @Override

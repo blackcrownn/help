@@ -1,29 +1,31 @@
 package help.help.dto;
 
 public class YaziDto {
-    long id;
-    String baslik;
-    String icerik;
-    private KategoriDto kategori;
+    private Long id;
+    private String baslik;
+    private String icerik;
+    private Long kategoriId;
 
+    public YaziDto() {}
 
-
-    public YaziDto() {
-    }
-
-    public YaziDto(Long id, String baslik, String icerik, KategoriDto kategoriDto) {
+    public YaziDto(Long id, String baslik, String icerik, Long kategoriId) {
         this.id = id;
         this.baslik = baslik;
         this.icerik = icerik;
-        this.kategori = kategoriDto;
+        this.kategoriId = kategoriId;
     }
 
+    public YaziDto(String baslik, String icerik, Long kategoriId) {
+        this.baslik = baslik;
+        this.icerik = icerik;
+        this.kategoriId = kategoriId;
+    }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -43,11 +45,11 @@ public class YaziDto {
         this.icerik = icerik;
     }
 
-    public KategoriDto getKategori() {
-        return kategori;
+    public Long getKategoriId() {
+        return kategoriId;
     }
 
-    public void setKategori(KategoriDto kategori) {
-        this.kategori = kategori;
+    public void setKategoriId(Long kategoriId) {
+        this.kategoriId = kategoriId;
     }
 }
