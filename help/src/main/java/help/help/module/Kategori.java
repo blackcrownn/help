@@ -3,6 +3,8 @@ package help.help.module;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,7 +26,7 @@ public class Kategori {
     private List<Kategori> subCategories;
 
     @OneToMany(mappedBy = "kategori", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Yazi> yazilar;
+    private List<Yazi> yazilar= new ArrayList<>();
 
     public Kategori() {}
 
