@@ -11,9 +11,10 @@ public class Yazi {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private Long id;
+
     private String baslik;
 
-    @Lob
+    //@Lob
     @Column(columnDefinition = "text")
     private String icerik;
 
@@ -22,9 +23,6 @@ public class Yazi {
     @JsonBackReference
     private Kategori kategori;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "parent_id")
-//    private Yazi parent;
 
     public Yazi() {
     }
@@ -33,7 +31,6 @@ public class Yazi {
         this.baslik = baslik;
         this.icerik = icerik;
         this.kategori = kategori;
-        //this.parent = parent;
     }
 
     public Long getId() {

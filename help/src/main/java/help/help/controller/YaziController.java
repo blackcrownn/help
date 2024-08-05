@@ -17,6 +17,7 @@ public class YaziController {
     private YaziService yaziService;
 
     @PostMapping("/saveyazi")
+    @CrossOrigin
     public ResponseEntity<YaziDto> saveYazi(@RequestBody YaziDto yaziDto) {
         YaziDto savedYazi = yaziService.save(yaziDto);
         return ResponseEntity.ok(savedYazi);
@@ -29,6 +30,7 @@ public class YaziController {
     }
 
     @GetMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<YaziDto> getYaziById(@PathVariable Long id) {
         YaziDto yaziDto = yaziService.getYaziById(id);
         return ResponseEntity.ok(yaziDto);

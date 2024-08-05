@@ -1,9 +1,5 @@
 package help.help.dto;
 
-
-//added by Berke
-// this explanation for not breaking the working code.
-
 public class SimpleYaziDto {
     private long id;
     private String title;

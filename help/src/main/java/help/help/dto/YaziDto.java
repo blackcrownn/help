@@ -21,6 +21,11 @@ public class YaziDto {
         this.kategoriId = kategoriId;
     }
 
+    public YaziDto(Long id, String baslik) {
+        this.id = id;
+        this.baslik = baslik;
+    }
+
     public Long getId() {
         return id;
     }

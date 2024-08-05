@@ -1,7 +1,5 @@
 package help.help.dto;
 
-import help.help.module.Yazi;
-
 public class MediaDto {
     private String fileName;
     private String filePath;

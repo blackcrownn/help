@@ -8,8 +8,17 @@ import java.util.stream.Collectors;
 
 @Component
 public class KategoriDtoConverter {
+
     public KategoriDto convertToDto(Kategori kategori) {
-        return new KategoriDto(kategori.getId(), kategori.getKategoriAdi(), kategori.getParent() != null ? kategori.getParent().getId() : null);
+        List<SimpleYaziTwoDto> yazilar = kategori.getYazilar().stream()
+                .map(yazi -> new SimpleYaziTwoDto(yazi.getId(), yazi.getBaslik()))
+                .collect(Collectors.toList());
+        return new KategoriDto(
+                kategori.getId(),
+                kategori.getKategoriAdi(),
+                kategori.getParent() != null ? kategori.getParent().getId() : null,
+                yazilar
+        );
     }
 
     public List<KategoriDto> convertToDtoList(List<Kategori> kategoriList) {
