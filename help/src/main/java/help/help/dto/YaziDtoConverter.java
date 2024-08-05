@@ -31,4 +31,8 @@ public class YaziDtoConverter {
                 .map(dto -> convertToEntity(dto, null))
                 .collect(Collectors.toList());
     }
+    public static SimpleYaziDto convertSimple(Yazi from) {
+        KategoriDto kategoriDto = from.getKategori() != null ? new KategoriDto(from.getKategori().getKategoriAdi(), from.getKategori().getId()) : null;
+        return new SimpleYaziDto(from.getId(), from.getBaslik(), kategoriDto);
+    }
 }

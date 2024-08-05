@@ -1,5 +1,6 @@
 package help.help.service;
 
+import help.help.dto.SimpleYaziDto;
 import help.help.dto.YaziDto;
 import help.help.dto.YaziDtoConverter;
 import help.help.module.Kategori;
@@ -69,5 +70,12 @@ public class YaziService {
         Yazi yazi = yaziRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Yazi bulunamadı"));
         return yaziDtoConverter.convertToDto(yazi);
+    }
+
+    public List<SimpleYaziDto> getAllSimpleYaziDtos(){
+        List<Yazi> yazilar = yaziRepository.findAll();
+        return yazilar.stream()
+                .map(y -> YaziDtoConverter.convertSimple(y))
+                .collect(Collectors.toList());
     }
 }
