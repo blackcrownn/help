@@ -16,18 +16,21 @@ public class KategoriController {
     private KategoriService kategoriService;
 
     @PostMapping("/savekategori")
+    @CrossOrigin
     public ResponseEntity<KategoriDto> saveKategori(@RequestBody KategoriDto kategoriDto) {
         KategoriDto savedKategori = kategoriService.save(kategoriDto);
         return ResponseEntity.ok(savedKategori);
     }
 
     @GetMapping("/all")
+    @CrossOrigin
     public ResponseEntity<List<KategoriDto>> getAllKategoriler() {
         List<KategoriDto> kategoriler = kategoriService.findAll();
         return ResponseEntity.ok(kategoriler);
     }
 
     @GetMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<KategoriDto> getKategoriById(@PathVariable Long id) {
         KategoriDto kategoriDto = kategoriService.getKategoriById(id);
         return ResponseEntity.ok(kategoriDto);

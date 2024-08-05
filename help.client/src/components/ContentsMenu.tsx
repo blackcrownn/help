@@ -18,9 +18,9 @@ interface TitleProps {
 export default function Category() {
   const [categories, setCategories] = useState<CategoryProps[]>([]);
   const [titles, setTitles] = useState<TitleProps[]>([]);
-  const [selectedId, setSelectedId] = useState<number >(0); // Seçilen yazının id'si
+  const [selectedId, setSelectedId] = useState<number>(1); // Seçilen yazının id'si
   const [isOpen, setIsOpen] = useState(false);
-  
+
   const toggleOffcanvas = () => {
     setIsOpen(!isOpen);
   };
@@ -40,7 +40,7 @@ export default function Category() {
     };
     fetchCategories();
   }, []);
-  
+
   // fetch titles
   useEffect(() => {
     const fetchtitles = async () => {
@@ -82,9 +82,9 @@ export default function Category() {
     </ul>
   );
 
-  
 
-  
+
+
 
   return (
     <div className="menuContainer">

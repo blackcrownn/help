@@ -25,6 +25,7 @@ public class YaziController {
     }
 
     @GetMapping("/allyazi")
+    @CrossOrigin
     public ResponseEntity<List<YaziDto>> getAllYazilar() {
         List<YaziDto> yazilar = yaziService.findAll();
         return ResponseEntity.ok(yazilar);
@@ -38,7 +39,6 @@ public class YaziController {
     }
 
     @DeleteMapping("/{id}")
-    @CrossOrigin
     public ResponseEntity<Void> deleteYazi(@PathVariable Long id) {
         yaziService.deleteYazi(id);
         return ResponseEntity.noContent().build();
