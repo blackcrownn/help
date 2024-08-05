@@ -37,7 +37,8 @@ export default function Contents({ id }: ContentsProps) {
 
   return (
     <div>
-      <button>update</button>
+      <br />
+      
       {content}
     </div>
   );

@@ -19,6 +19,11 @@ export default function Category() {
   const [categories, setCategories] = useState<CategoryProps[]>([]);
   const [titles, setTitles] = useState<TitleProps[]>([]);
   const [selectedId, setSelectedId] = useState<number >(0); // Seçilen yazının id'si
+  const [isOpen, setIsOpen] = useState(false);
+  
+  const toggleOffcanvas = () => {
+    setIsOpen(!isOpen);
+  };
 
   // fetch categories
   useEffect(() => {
@@ -54,6 +59,7 @@ export default function Category() {
 
   // tıklanan yazının id'sini kaydet
   const handleTitleClick = (id: number) => {
+    toggleOffcanvas();
     setSelectedId(id);
   };
 
@@ -76,11 +82,9 @@ export default function Category() {
     </ul>
   );
 
-  const [isOpen, setIsOpen] = useState(false);
+  
 
-  const toggleOffcanvas = () => {
-    setIsOpen(!isOpen);
-  };
+  
 
   return (
     <div className="menuContainer">
@@ -91,7 +95,7 @@ export default function Category() {
           {items}
         </div>
       </div>
-      {selectedId && <Contents id={selectedId} />} {/* Seçilen yazıyı göstermek için Contents bileşenini render et */}
+      {<Contents id={selectedId} />} {/*  */}
     </div>
   );
 }

@@ -13,12 +13,9 @@ function App() {
   return (
     <div>
       <Navbar/>
-      <ContentsMenu/>
       <Routes>
         <Route path="/*" element={<HomePage/>} />
         <Route path="/texteditor" element={<TextEditor/>} />
-        <Route path="/content/*" element={<ContentPage/>}/>
-        <Route path='/contentsmenu' element={<ContentsMenu/>}/>
       </Routes>
     </div>
   );

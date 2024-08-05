@@ -17,11 +17,6 @@ interface CategoryProps {
 
 
 
-
-function getQuillContent() {
- 
-}
-
 //Rich Text Editor
 export default function TextEditor() {
   //definitions
@@ -133,6 +128,10 @@ export default function TextEditor() {
     setSelectedCategory(category);
   }
 
+
+
+
+  const pageUI = useState();
 
 
   return (
