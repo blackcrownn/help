@@ -12,7 +12,6 @@ interface CategoryProps {
 interface TitleProps {
   id: number;
   title: string;
-  kategoriDto: string;
 }
 
 export default function Category() {

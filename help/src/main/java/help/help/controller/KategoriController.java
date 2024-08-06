@@ -16,6 +16,7 @@ public class KategoriController {
     private KategoriService kategoriService;
 
     @PostMapping("/savekategori")
+    @CrossOrigin(origins = "http://localhost:3000") 
     public ResponseEntity<KategoriDto> saveKategori(@RequestBody KategoriDto kategoriDto) {
         KategoriDto savedKategori = kategoriService.save(kategoriDto);
         return ResponseEntity.ok(savedKategori);

@@ -13,7 +13,7 @@
 }
 
 .box {
-   width: 80%;
+   width: 60%;
    height: 2rem;
    margin-top: 2rem;
    margin-left: 2rem;
@@ -21,6 +21,25 @@
    border-width: 3px;
    border-radius: 5px;
 }
+
+.button-menu{
+   width: 20%;
+   height: auto;
+   align-items: center;
+}
+
+.box.add-category-btn, .box.save-new-category-btn,.box.close-form:active, .send-btn {
+   transition: transform 0.1s ease-in-out;
+   cursor: pointer;
+
+}
+
+.box.add-category-btn:active, .box.save-new-category-btn:active, .send-btn:active, .box.close-form:active {
+   transform: scale(0.95);
+   cursor: pointer;
+   
+}
+
 
 .container {
    z-index: 1000;

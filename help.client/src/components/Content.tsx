@@ -18,7 +18,7 @@ export default function Contents({ id }: ContentsProps) {
 
     useEffect(() => {
         const getData = async () => {
-            const response = await fetch(`http://localhost:8080/api/yazi/id/${id}`);
+            const response = await fetch(`http://localhost:8080/api/yazi/${id}`);
             const data = await response.json();
             setText(data);
         };
