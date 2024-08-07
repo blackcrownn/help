@@ -41,7 +41,8 @@ export default function TextEditor() {
   const [showUpdate, setShowUpdate] = useState<boolean>(false);
   const [showEditor, setShowEditor] = useState<boolean>(false);
   const [contentList, setcontentList] = useState<TitleProps[]>([]);
-  const [selectedContent, setSelectedContent] = useState<TitleProps | null>(null);
+  const [selectedContent, setSelectedContent] = useState<TitleProps>();
+
 
   // toolbar options
   const modules = {
@@ -101,18 +102,26 @@ export default function TextEditor() {
     return null;
   };
 
+
+  // setting content empty
+  const setContentsEmpty = () => {
+    setContent("");
+    setTitle("");
+    setSelectedCategory(undefined);
+  }
+
   // setting category id
-  const handleCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCategory = (event) => {
     const selected = category.find((cat) => cat.kategoriAdi === event.target.value);
     setSelectedCategory(selected?.id);
   };
 
-  const handleTitle = (input: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTitle = (input) => {
     setTitle(input.target.value);
   };
 
   // handle selected content change
-  const handleSelectedContent = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectedContent = async (event) => {
     const selectedId = Number(event.target.value);
     const selectedContent = contentList.find(content => content.id === selectedId);
     if (selectedContent) {
@@ -176,7 +185,7 @@ export default function TextEditor() {
           {
             baslik: title,
             icerik: content,
-            kategori: selectedCategory,
+            kategoriId: selectedCategory,
           }
         );
         console.log("********************");
@@ -190,6 +199,61 @@ export default function TextEditor() {
     }
   };
 
+
+
+  const updateContent = async () => { 
+    console.log("sunucuya gonderilecek içerik", content);
+    console.log("sunucuya gonderilecek", title);
+    if (content === undefined) {
+      alert("Content boş olamaz.");
+    }
+    // title
+    else if (title === "") {
+      alert("Title boş olamaz.");
+    }
+    // category
+    else if (selectedCategory === undefined) {
+      alert("Kategori boş olamaz.");
+    } else {
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/api/yazi/saveyazi",
+          {
+            baslik: title,
+            icerik: content,
+            kategoriId: selectedCategory,
+          }
+        );
+        console.log("********************");
+        console.log("sunucuya gonderilecek", content);
+        console.log("Sunucu yanıtı:", response.data);
+        alert("Yazı başarıyla kaydedildi.");
+      } catch (error) {
+        console.error("Sunucu yaniti :", error);
+        alert("Yazı kaydedilirken bir hata oluştu." + error);
+      }
+    }
+
+
+  };
+
+
+
+    const deleteContent = async () => {
+      if (selectedContent) {
+        const confirmed = window.confirm("Silmek istediğinizden emin misiniz?");
+        if (confirmed) {
+          try {
+            await axios.delete(`http://localhost:8080/api/yazi/${selectedContent.id}`);
+            alert("İçerik başarıyla silindi.");
+            setSelectedContent(undefined);
+          } catch (error) {
+          console.error("Sunucu yaniti :", error);
+          alert("İçerik silinirken bir hata oluştu." + error);
+          }
+          }
+      }
+    };
   return (
     <div className="mainContainer">
       {/* MENU */}
@@ -226,13 +290,6 @@ export default function TextEditor() {
             value={title}
             onChange={handleTitle}
           />
-          <input
-            type="text"
-            className="box category-input"
-            placeholder="Kategori"
-            value={selectedCategoryName}
-            readOnly
-          />
           <select className="box category-input" onChange={handleCategory}>
             <option value="">Kategori seçin veya yeni bir kategori oluşturun</option>
             {category.map((cat) => (
@@ -247,7 +304,7 @@ export default function TextEditor() {
           >
             Yeni Kategori Ekle
           </button>
-          <button className="box close-form" onClick={() => { setShowEditor(false); setShowMenu(true) }}>Ana Menu</button>
+          
           {/* this is for toogling the form */}
           {showNewCategoryForm && (
             <div className="new-category">
@@ -262,7 +319,7 @@ export default function TextEditor() {
                 className="box new-category-parent-input"
                 onChange={(e) => setNewCategoryParent(Number(e.target.value))}
               >
-                <option value="">Parent kategori seçin</option>
+                <option value="">Üst kategori seçin</option>
                 {category.map((cat) => (
                   <option key={cat.id} value={cat.id}>
                     {cat.kategoriAdi}
@@ -275,7 +332,7 @@ export default function TextEditor() {
               <button className="box close-form" onClick={() => setShowNewCategoryForm(false)}>Vazgeç</button>
             </div>
           )}
-
+            <button className="box close-form" onClick={() => { setShowEditor(false); setShowMenu(true); setContentsEmpty() }}>Ana Menu</button>
           {/* the button that sends the inputs to the server */}
           <button className="send-btn" onClick={send}>Yayımla</button>
         </div>
@@ -299,14 +356,17 @@ export default function TextEditor() {
             value={title}
             onChange={handleTitle}
           />
-          <input
-            type="text"
-            className="box category-input"
-            placeholder="Kategori"
-            value={selectedCategoryName}
-            readOnly
-          />
-          <button className="box close-form" onClick={() => { setShowUpdate(false); setShowMenu(true) }}>Ana Menu</button>
+          <select className="box category-input" onChange={handleCategory}>
+            <option value="">{selectedCategoryName}</option>
+            {category.map((cat) => (
+              <option key={cat.id} value={cat.kategoriAdi}>
+                {cat.kategoriAdi}
+              </option>
+            ))}
+          </select>
+          <button className="box close-form" onClick={() => { setShowUpdate(false); setShowMenu(true); setContentsEmpty() }}>Ana Menu</button>
+          <button className="update-btn" onClick={updateContent}>Güncelle</button>
+          <button className="delete-btn" onClick={deleteContent}>Sil</button>
         </div>
       )}
 

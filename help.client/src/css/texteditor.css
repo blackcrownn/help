@@ -81,7 +81,7 @@
    background-color: #f3f3f3;
 }
 
-.send-btn {
+.send-btn, .update-btn{
    font-weight: bold;
    color: white;
    position: absolute;
@@ -97,6 +97,24 @@
    border-radius: 20px;
    cursor: pointer;
 }
+
+.delete-btn {
+   font-weight: bold;
+   color: white;
+   position: absolute;
+   top: 9rem;
+   right: 10px;
+   justify-content: center;
+   align-items: center;
+   padding: 6px 12px;
+   height: 32px;
+   width: 100px;
+   border: none;
+   background: #445872;
+   border-radius: 20px;
+   cursor: pointer;
+}
+
 
 .send-btn:hover {
    background: #724458;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+
 // Text props
 interface Text {
     id: number;
@@ -29,14 +30,14 @@ export default function Contents({ id }: ContentsProps) {
         <p>Yükleniyor...</p>
     ) : (
         <div>
-            <div>{text.baslik}</div>
+            <div className="title-of-content">{text.baslik}</div>
             <br />
             <div dangerouslySetInnerHTML={{ __html: text.icerik }} />
         </div>
     );
 
     return (
-        <div>
+        <div className="contentContainer">
             <br />
 
             {content}

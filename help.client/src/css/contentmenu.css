@@ -1,57 +1,68 @@
-
-.menuContainer{
-    background-color: transparent;
-    width: 25%;
-    min-height: auto;
-    padding: 0;
-
+.menuContainer {
+  background-color: transparent;
+  width: 25%;
+  min-height: auto;
+  padding: 0;
 }
 
-
-.menu{
-    display: block;
-    position: absolute;
-    align-self: left;
-    background-color: #724458;
-    width: 20%;
-    height: 100%;
-    box-shadow: inset 400px 700px 500px -500px #445872;
-    left: -20%;
-    transition: transform 0.3s ease;
-    z-index: 1000; /* Menüyü diğer içeriklerin üzerine yerleştirir */
-    overflow: hidden;
+.menu {
+  display: block;
+  position: absolute;
+  align-self: left;
+  background-color: #724458;
+  width: 20%;
+  height: 100%;
+  box-shadow: inset 400px 700px 500px -500px #445872;
+  left: -20%;
+  transition: transform 0.3s ease;
+  z-index: 1000; /* Menüyü diğer içeriklerin üzerine yerleştirir */
+  overflow: hidden;
 }
-
-
 
 .menu.open {
-    transform: translateX(100%); /* Menü ekrandan sağa kayar */
-  }
-  
+  transform: translateX(100%); /* Menü ekrandan sağa kayar */
+}
 
-  .open-btn {
-    position: absolute;
-    background-color: #080707;
-    color: #fff;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    z-index: 1001; 
-    border-radius:0 0  50% 0 ;
-    transition: transform 0.3s ease;
-    
-  }
-  
-  .open-btn:active {
-    transform: scale(0.95);
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  }
+.open-btn {
+  position: fixed;
+  background-color: #080707;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1001;
+  border-radius: 0 0 50% 0;
+  transition: transform 0.3s ease;
+}
+
+.open-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.menuitems {
+  color: #fff;
+  padding-left: 1rem;
+  overflow-y: auto; /* Dikey kaydırma çubuğu ekler */
+  max-height: 90vh; /* Menü yüksekliğini sınırlayarak kaydırma çubuğunu etkinleştirir */
+}
 
 
-  
+.menuitems::-webkit-scrollbar {
+  width: 12px; 
+}
 
-.menuitems{
-    color: #fff;
-    padding-left: 1rem ;
+.menuitems::-webkit-scrollbar-track {
+  background: transparent; 
+}
 
+.menuitems::-webkit-scrollbar-thumb {
+  background-color: #fff; 
+  border-radius: 10px; 
+  border: 3px solid transparent; 
+  background-clip: content-box; 
+}
+
+.menuitems::-webkit-scrollbar-thumb:hover {
+  background-color: #ccc; 
 }
