@@ -11,7 +11,7 @@
     position: absolute; 
     top: 5rem; 
     left: 50%; 
-    transform: translate(-50%, -50%); 
+    transform: translateX(-50%);
     background-color: #f6f8fb;
     width: 80%;
     height: auto;

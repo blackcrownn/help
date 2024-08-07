@@ -43,7 +43,6 @@ export default function TextEditor() {
   const [contentList, setcontentList] = useState<TitleProps[]>([]);
   const [selectedContent, setSelectedContent] = useState<TitleProps>();
 
-
   // toolbar options
   const modules = {
     toolbar: [
@@ -64,30 +63,32 @@ export default function TextEditor() {
   };
 
   // fetching Categories for selection
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/kategori/all");
+      console.log(response);
+      setCategory(response.data);
+    } catch (error) {
+      console.error("Sunucu yaniti :", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/api/kategori/all");
-        console.log(response);
-        setCategory(response.data);
-      } catch (error) {
-        console.error("Sunucu yaniti :", error);
-      }
-    };
     fetchCategories();
   }, []);
 
   // fetching Contents for editing
+  const fetchContent = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/yazi/allyazi");
+      console.log(response);
+      setcontentList(response.data);
+    } catch (error) {
+      console.error("Sunucu yaniti :", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/api/yazi/allyazi");
-        console.log(response);
-        setcontentList(response.data);
-      } catch (error) {
-        console.error("Sunucu yaniti :", error);
-      }
-    };
     fetchContent();
   }, []);
 
@@ -101,7 +102,6 @@ export default function TextEditor() {
     }
     return null;
   };
-
 
   // setting content empty
   const setContentsEmpty = () => {
@@ -128,7 +128,7 @@ export default function TextEditor() {
       setTitle(selectedContent.baslik);
       setContent(selectedContent.icerik);
       setSelectedContent(selectedContent);
-  
+
       // Find the selected category name by id
       const selectedCategory = category.find(cat => cat.id === selectedContent.kategoriId);
       if (selectedCategory) {
@@ -151,10 +151,11 @@ export default function TextEditor() {
           }
         );
         console.log("Sunucu yanıtı:", response.data);
-        setCategory([...category, response.data]);
+        fetchCategories();
         setNewCategoryName("");
         setNewCategoryParent(undefined);
         setShowNewCategoryForm(false); // Hide the form after saving
+        
         alert("Kategori başarıyla kaydedildi.");
       } catch (error) {
         console.error("Sunucu yaniti :", error);
@@ -180,6 +181,7 @@ export default function TextEditor() {
       alert("Kategori boş olamaz.");
     } else {
       try {
+        console.log("selectedContent : ", selectedContent?.id);
         const response = await axios.post(
           "http://localhost:8080/api/yazi/saveyazi",
           {
@@ -192,6 +194,7 @@ export default function TextEditor() {
         console.log("sunucuya gonderilecek", content);
         console.log("Sunucu yanıtı:", response.data);
         alert("Yazı başarıyla kaydedildi.");
+        fetchContent();
       } catch (error) {
         console.error("Sunucu yaniti :", error);
         alert("Yazı kaydedilirken bir hata oluştu." + error);
@@ -199,9 +202,7 @@ export default function TextEditor() {
     }
   };
 
-
-
-  const updateContent = async () => { 
+  const updateContent = async () => {
     console.log("sunucuya gonderilecek içerik", content);
     console.log("sunucuya gonderilecek", title);
     if (content === undefined) {
@@ -211,14 +212,13 @@ export default function TextEditor() {
     else if (title === "") {
       alert("Title boş olamaz.");
     }
-    // category
-    else if (selectedCategory === undefined) {
-      alert("Kategori boş olamaz.");
-    } else {
+     else {
       try {
+        console.log("selectedContent : ", selectedContent?.id);
         const response = await axios.post(
           "http://localhost:8080/api/yazi/saveyazi",
           {
+            id: selectedContent?.id,
             baslik: title,
             icerik: content,
             kategoriId: selectedCategory,
@@ -233,27 +233,26 @@ export default function TextEditor() {
         alert("Yazı kaydedilirken bir hata oluştu." + error);
       }
     }
-
-
   };
 
-
-
-    const deleteContent = async () => {
-      if (selectedContent) {
-        const confirmed = window.confirm("Silmek istediğinizden emin misiniz?");
-        if (confirmed) {
-          try {
-            await axios.delete(`http://localhost:8080/api/yazi/${selectedContent.id}`);
-            alert("İçerik başarıyla silindi.");
-            setSelectedContent(undefined);
-          } catch (error) {
+  const deleteContent = async () => {
+    if (selectedContent) {
+      const confirmed = window.confirm("Silmek istediğinizden emin misiniz?");
+      if (confirmed) {
+        try {
+          await axios.delete(`http://localhost:8080/api/yazi/${selectedContent.id}`);
+          alert("İçerik başarıyla silindi.");
+          setSelectedContent(undefined);
+          fetchContent(); 
+          setContentsEmpty();
+        } catch (error) {
           console.error("Sunucu yaniti :", error);
           alert("İçerik silinirken bir hata oluştu." + error);
-          }
-          }
+        }
       }
-    };
+    }
+  };
+
   return (
     <div className="mainContainer">
       {/* MENU */}
@@ -304,7 +303,7 @@ export default function TextEditor() {
           >
             Yeni Kategori Ekle
           </button>
-          
+
           {/* this is for toogling the form */}
           {showNewCategoryForm && (
             <div className="new-category">
@@ -332,7 +331,7 @@ export default function TextEditor() {
               <button className="box close-form" onClick={() => setShowNewCategoryForm(false)}>Vazgeç</button>
             </div>
           )}
-            <button className="box close-form" onClick={() => { setShowEditor(false); setShowMenu(true); setContentsEmpty() }}>Ana Menu</button>
+          <button className="box close-form" onClick={() => { setShowEditor(false); setShowMenu(true); setContentsEmpty() }}>Ana Menu</button>
           {/* the button that sends the inputs to the server */}
           <button className="send-btn" onClick={send}>Yayımla</button>
         </div>
