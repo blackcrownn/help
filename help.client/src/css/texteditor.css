@@ -1,15 +1,16 @@
 .mainContainer {
    background-color: #d9dde2;
-   min-height: 100vh; 
-   display: flex; 
-   flex-direction: column; 
+   min-height: 100vh;
+   display: flex;
+   flex-direction: row; /* Row olarak ayarlayın ki sidebar ve content yan yana gelsin */
 }
 
-.inputs {
-   width: 20%;
-   height: 100%;
-   font-size: 24px;
-   font-family: 'Times New Roman', Times, serif;
+.quill-text-editor {
+   display: flex;
+   flex-direction: column;
+   width: 80%; /* Eklendi: Editor'un genişliğini ayarlamak için */
+   padding: 20px;
+   background-color: transparent;
 }
 
 .box {
@@ -22,35 +23,85 @@
    border-radius: 5px;
 }
 
+.allCategories{
+   font-size: 20px;
+}
+
+
+.allTitles{
+   font-size: 16px;
+   cursor: pointer;
+}
+
 .button-menu{
    width: 20%;
    height: auto;
    align-items: center;
 }
 
-.box.add-category-btn, .box.save-new-category-btn,.box.close-form:active, .send-btn {
+
+.delete-btn  {
+   font-weight: bold;
+   color: rgb(255, 255, 255);
+   margin-left: 15px;
+   justify-content: center;
+   align-items: center;
+   height: 15px;
+   width: 15px;
+   border: none;
+   background: #c5000085;
+   cursor: pointer;
+}
+
+.add-btn {
+   font-weight: bold;
+   color: rgb(255, 255, 255);
+   margin-left: 15px;
+   justify-content: center;
+   align-items: center;
+   height: 15px;
+   width: 15px;
+   border: none;
+   background: #03d40385;
+   cursor: pointer;
+}  
+
+
+
+.send-btn , .box.buttons-of-menu,  .update-btn{
    transition: transform 0.1s ease-in-out;
    cursor: pointer;
 
 }
 
-.box.add-category-btn:active, .box.save-new-category-btn:active, .send-btn:active, .box.close-form:active {
+.send-btn:active,.box.buttons-of-menu:active {
    transform: scale(0.95);
    cursor: pointer;
    
 }
 
+.sidebar {
+   display: flex;
+   flex-direction: column;
+   background-color: #445872;
+   width: 20%;
+   min-height: 100vh; /* Eklendi: Tam yükseklik */
+   box-shadow: inset 400px 700px 500px -500px #445872;
+   z-index: 1000;
+   overflow: hidden;
+}
 
 .container {
    z-index: 1000;
    display: flex;
    flex-direction: column;
-   justify-content: center;
+   justify-content: flex-start; /* Eklendi: İçeriği üste hizalayın */
    align-items: center;
    width: 100%;
-   max-width: 80%; 
+   max-width: 80%; /* İsteğe bağlı, tam genişlik */
    margin: 0 auto;
    flex: 1; /* İçeriğin tüm boş alanı kaplamasını sağlar */
+   background-color: transparent;
 }
 
 .container .ql-editor {
@@ -64,13 +115,15 @@
    overflow: hidden; 
 }
 
-.container .ql-container.ql-snow {
-   border: none;
+.container .ql-toolbar.ql-snow {
    display: flex;
    justify-content: center;
-   height: auto; 
+   position: sticky;
+   top: 0;
+   z-index: 1;
+   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+   background-color: #f3f3f3;
 }
-
 .container .ql-toolbar.ql-snow {
    display: flex;
    justify-content: center;
@@ -98,22 +151,7 @@
    cursor: pointer;
 }
 
-.delete-btn {
-   font-weight: bold;
-   color: white;
-   position: absolute;
-   top: 9rem;
-   right: 10px;
-   justify-content: center;
-   align-items: center;
-   padding: 6px 12px;
-   height: 32px;
-   width: 100px;
-   border: none;
-   background: #445872;
-   border-radius: 20px;
-   cursor: pointer;
-}
+
 
 
 .send-btn:hover {

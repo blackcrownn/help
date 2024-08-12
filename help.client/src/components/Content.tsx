@@ -13,7 +13,7 @@ interface ContentsProps {
     id: number;
 }
 
-// get the content and returns it
+// gets the content and returns it
 export default function Contents({ id }: ContentsProps) {
     const [text, setText] = useState<Text>();
 

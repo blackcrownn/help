@@ -5,7 +5,7 @@ import Contents from "./Content.tsx";
 
 interface TitleProps {
   id: number;
-  title: string;
+  baslik: string;
 }
 
 interface CategoryProps {
@@ -17,7 +17,7 @@ interface CategoryProps {
 
 export default function Category() {
   const [categories, setCategories] = useState<CategoryProps[]>([]);
-  const [selectedId, setSelectedId] = useState<number | null>(null); // Seçilen yazının id'si
+  const [selectedId, setSelectedId] = useState<number | null>(null); 
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOffcanvas = () => {
@@ -36,25 +36,30 @@ export default function Category() {
       }
     };
     fetchCategories();
+    ;
   }, []);
 
-  // tıklanan yazının id'sini kaydet
+  // saving the id which is selected
   const handleTitleClick = (id: number) => {
     toggleOffcanvas();
     setSelectedId(id);
   };
+
+
+
+
 
   const items = categories.length === 0 ? (
     <p>Yükleniyor...</p>
   ) : (
     <ul>
       {categories.map((category) => (
-        <li key={category.id}>
-          <p>{category.kategoriAdi}</p>
+        <li className="category-names" key={category.id}>
+          {category.kategoriAdi}
           <ul>
             {category.yazilar.map((title) => (
-              <li key={title.id} onClick={() => handleTitleClick(title.id)}>
-                {title.title}
+              <li className="titles-of-contents" key={title.id} onClick={() => handleTitleClick(title.id)}>
+                {title.baslik}
               </li>
             ))}
           </ul>
@@ -63,6 +68,8 @@ export default function Category() {
     </ul>
   );
 
+
+  
   return (
     <div className="menuContainer">
       <button onClick={toggleOffcanvas} className={"open-btn" + (isOpen ? " open" : "")}>
