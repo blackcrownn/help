@@ -43,24 +43,6 @@ public class SimpleYaziDto {
     }
     
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 

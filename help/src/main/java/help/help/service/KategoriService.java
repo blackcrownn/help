@@ -7,7 +7,6 @@ import help.help.repository.KategoriRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,4 +67,6 @@ public class KategoriService {
                 .orElseThrow(() -> new RuntimeException("Kategori bulunamadı"));
         return kategoriDtoConverter.convertToDto(kategori);
     }
+
+
 }

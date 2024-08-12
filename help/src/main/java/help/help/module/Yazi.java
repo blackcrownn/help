@@ -14,7 +14,7 @@ public class Yazi {
 
     private String baslik;
 
-    //@Lob
+    @Lob
     @Column(columnDefinition = "text")
     private String icerik;
 

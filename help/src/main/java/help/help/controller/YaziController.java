@@ -47,6 +47,12 @@ public class YaziController {
     public List<SimpleYaziDto> getSimpleYaziDto(){
         return yaziService.getAllSimpleYaziDtos();
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<YaziDto> updateYazi(@PathVariable Long id, @RequestBody YaziDto yaziDto) {
+        YaziDto updatedYazi = yaziService.updateYazi(id, yaziDto);
+        return ResponseEntity.ok(updatedYazi);
+    }
 }
 
 
